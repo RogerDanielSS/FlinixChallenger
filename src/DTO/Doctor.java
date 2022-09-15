@@ -10,6 +10,14 @@ public class Doctor {
 
 
 
+  /**
+   * Constructor of Doctor class
+   * @param id id of the doctor
+   * @param name name of the doctor
+   * @param crm crm of the doctor
+   * 
+   * @param created_by_ID created_by_ID of the doctor
+   */
   public Doctor(String id, String name, String crm, String created_by_ID) {
     this.id = id;
     this.name = name;
@@ -19,13 +27,21 @@ public class Doctor {
 
 
 
-  public boolean postProdutivity(String serviceAt, String value, String description) {
+  /**
+   * Method used to post new produtivities 
+   * @param serviceAt data in format YYYY-MM-DD
+   * @param value value of produtivity with >TWO< decimals 
+   * @param description description with max 255 characters
+   * 
+   * @return true if produtivity was successfully posted, false if not
+   */
+  public boolean postProductivity(String serviceAt, String value, String description) {
     String[] valuesToBePosted = { "default", serviceAt, value, description, this.id };
     Integer[] positionOfValuesToBeUsedAsSQLFunction = { 0 };
 
     try {
 
-      return dataBase.genericPost("produtivities", valuesToBePosted, positionOfValuesToBeUsedAsSQLFunction);
+      return dataBase.genericPost("productivities", valuesToBePosted, positionOfValuesToBeUsedAsSQLFunction);
 
     } catch (Exception_DataBaseConnection e) {
 
@@ -42,14 +58,20 @@ public class Doctor {
   } // postProdutivity ends here
 
 
-
-  public boolean postProdutivity_CurrentDate(String value, String description) {
+  /**
+   * Method used to post new produtivities in current date
+   * @param value value of produtivity with >TWO< decimals 
+   * @param description description with max 255 characters
+   * 
+   * @return true if produtivity was successfully posted, false if not
+   */
+  public boolean postProductivity_CurrentDate(String value, String description) {
     String[] valuesToBePosted = { "default", "current_date()", value, description, this.id };
     Integer[] positionOfValuesToBeUsedAsSQLFunction = { 0, 1 };
 
     try {
 
-      return dataBase.genericPost("produtivities", valuesToBePosted, positionOfValuesToBeUsedAsSQLFunction);
+      return dataBase.genericPost("productivities", valuesToBePosted, positionOfValuesToBeUsedAsSQLFunction);
 
     } catch (Exception_DataBaseConnection e) {
 
